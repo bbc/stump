@@ -1,0 +1,2 @@
+defmodule EventLogger do
+end

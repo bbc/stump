@@ -4,51 +4,24 @@ defmodule EventLogger do
 
   def log(level, data) do
     case downcase(level) do
-      "info"  -> info(level, data)
-      "warn"  -> warn(level, data)
-      "error" -> error(level, data)
-      _       -> error("error", nil)
+      "info"  -> data_type(level, data)   |> Logger.info
+      "warn"  -> data_type(level, data)   |> Logger.warn
+      "error" -> data_type(level, data)   |> Logger.error
+      _       -> data_type("error", nil)  |> Logger.error
     end
   end
 
   def log(_) do
-    error("error", "No input passed to EventLogger")
-  end
-
-  defp info(level, data) when is_map(data) do
-    map(level, data)
-    |> Logger.info
-  end
-
-  defp info(level, data) when is_bitstring(data) do
-    string(level, data)
-    |> Logger.info
-  end
-
-  defp warn(level, data) when is_map(data) do
-    map(level, data)
-    |> Logger.warn
-  end
-
-  defp warn(level, data) when is_bitstring(data) do
-    string(level, data)
-    |> Logger.warn
-  end
-
-  defp error(level, data) when is_map(data) do
-    map(level, data)
+    data_type("error", "No input passed to EventLogger")
     |> Logger.error
   end
 
-  defp error(level, data) when is_bitstring(data) do
-    string(level, data)
-    |> Logger.error
-  end
-
-  defp error(level, data) when data === nil do
-    message = "Incorrect log level assigned to EventLogger"
-    string(level, message)
-    |> Logger.error
+  defp data_type(level, data) do
+    case data do
+      nil          -> string(level, "Incorrect log level assigned to EventLogger")
+      is_bitstring -> string(level, data)
+      is_map       -> map(level, data)
+    end
   end
 
   defp map(level, data) do

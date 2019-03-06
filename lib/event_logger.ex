@@ -12,4 +12,16 @@ defmodule EventLogger do
     |> Poison.encode!()
     |> Logger.info
   end
+
+  def warn(data) when is_map(data) do
+    Map.merge(data, %{datetime: DateTime.utc_now, level: "warn"})
+    |> Poison.encode!()
+    |> Logger.warn
+  end
+
+  def warn(data) when is_bitstring(data) do
+    %{message: data, datetime: DateTime.utc_now, level: "warn"}
+    |> Poison.encode!()
+    |> Logger.warn
+  end
 end

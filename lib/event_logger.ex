@@ -7,7 +7,12 @@ defmodule EventLogger do
       "info"  -> info(level, data)
       "warn"  -> warn(level, data)
       "error" -> error(level, data)
+      _       -> error("error", nil)
     end
+  end
+
+  def log(_) do
+    error("error", "No input passed to EventLogger")
   end
 
   defp info(level, data) when is_map(data) do
@@ -37,6 +42,12 @@ defmodule EventLogger do
 
   defp error(level, data) when is_bitstring(data) do
     string(level, data)
+    |> Logger.error
+  end
+
+  defp error(level, data) when data === nil do
+    message = "Incorrect log level assigned to EventLogger"
+    string(level, message)
     |> Logger.error
   end
 

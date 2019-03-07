@@ -4,21 +4,16 @@ defmodule EventLogger do
 
   def log(level, data) do
     case level do
-      :info  -> data_type(level, data)   |> Logger.info
-      :warn  -> data_type(level, data)   |> Logger.warn
-      :error -> data_type(level, data)   |> Logger.error
-      _      -> data_type("error", nil)  |> Logger.error
+      :info  -> data_type(level, data) |> Logger.info
+      :warn  -> data_type(level, data) |> Logger.warn
+      :error -> data_type(level, data) |> Logger.error
+      _      -> data_type("error", "Incorrect log level assigned to EventLogger") |> Logger.error
     end
-  end
-
-  def log(_) do
-    data_type("error", "No input passed to EventLogger")
-    |> Logger.error
   end
 
   defp data_type(level, data) do
     case data do
-      nil          -> string(level, "Incorrect log level assigned to EventLogger")
+      nil          -> string(level, "Event Logger received log level, but no error message was provided")
       is_bitstring -> string(level, data)
       is_map       -> map(level, data)
     end

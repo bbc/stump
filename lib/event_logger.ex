@@ -3,11 +3,11 @@ defmodule EventLogger do
   import String, only: [downcase: 1]
 
   def log(level, data) do
-    case downcase(level) do
-      "info"  -> data_type(level, data)   |> Logger.info
-      "warn"  -> data_type(level, data)   |> Logger.warn
-      "error" -> data_type(level, data)   |> Logger.error
-      _       -> data_type("error", nil)  |> Logger.error
+    case level do
+      :info  -> data_type(level, data)   |> Logger.info
+      :warn  -> data_type(level, data)   |> Logger.warn
+      :error -> data_type(level, data)   |> Logger.error
+      _      -> data_type("error", nil)  |> Logger.error
     end
   end
 

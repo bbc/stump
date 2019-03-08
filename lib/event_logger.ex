@@ -20,4 +20,8 @@ defmodule EventLogger do
     %{message: data, datetime: time(), level: to_string(level)}
     |> Poison.encode!()
   end
+
+  def time() do
+    @time.utc_now()
+  end
 end

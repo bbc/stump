@@ -7,7 +7,7 @@ defmodule EventLogger do
     Logger.log(level, format(level, data))
   end
 
-  defp format(level, data) when data === nil or data === "" do
+  defp format(level, data) when data == nil or data == "" do
     format(level, "Event Logger received log level, but no error message was provided")
   end
 

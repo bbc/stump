@@ -1,31 +1,23 @@
 defmodule EventLogger do
-  import Logger, only: [info: 1, warn: 1, error: 1]
-  import String, only: [downcase: 1]
+  import Logger, only: [log: 2]
 
-  def log(level, data) do
-    case level do
-      :info  -> data_type(level, data) |> Logger.info
-      :warn  -> data_type(level, data) |> Logger.warn
-      :error -> data_type(level, data) |> Logger.error
-      _      -> data_type("error", "Incorrect log level assigned to EventLogger") |> Logger.error
-    end
+  @time EventLogger.Time.MockTime
+
+  def log(level, data) when level in [:error, :warn, :info] do
+    Logger.log(level, format(level, data))
   end
 
-  defp data_type(level, data) do
-    case data do
-      nil          -> string(level, "Event Logger received log level, but no error message was provided")
-      is_bitstring -> string(level, data)
-      is_map       -> map(level, data)
-    end
+  defp format(level, data) when data === nil or data === "" do
+    format(level, "Event Logger received log level, but no error message was provided")
   end
 
-  defp map(level, data) do
-    Map.merge(data, %{datetime: DateTime.utc_now, level: to_string(level)})
+  defp format(level, data) when is_map(data) do
+    Map.merge(data, %{datetime: time(), level: to_string(level)})
     |> Poison.encode!()
   end
 
-  defp string(level, data) do
-    %{message: data, datetime: DateTime.utc_now, level: to_string(level)}
+  defp format(level, data) when is_bitstring(data) or is_binary(data) do
+    %{message: data, datetime: time(), level: to_string(level)}
     |> Poison.encode!()
   end
 end

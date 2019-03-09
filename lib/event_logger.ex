@@ -1,7 +1,7 @@
 defmodule EventLogger do
   import Logger, only: [log: 2]
 
-  @time EventLogger.Time.MockTime
+  @time Application.get_env(:event_logger, :time_api)
 
   def log(level, data) when level in [:error, :warn, :info] do
     Logger.log(level, format(level, data))
@@ -12,7 +12,8 @@ defmodule EventLogger do
   end
 
   defp format(level, data) when is_map(data) do
-    Map.merge(data, %{datetime: time(), level: to_string(level)})
+    data
+    |> Map.merge(%{datetime: time(), level: to_string(level)})
     |> Poison.encode!()
   end
 

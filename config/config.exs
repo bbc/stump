@@ -29,7 +29,7 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
-config :logger, :console, format: "$message\n"
+config :logger, :console, format: "$message\n", colors: [enabled: false]
 
 config :event_logger, :environment, Mix.env()
 

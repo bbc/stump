@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :event_logger, key: :value
+#     config :stump, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:event_logger, :key)
+#     Application.get_env(:stump, :key)
 #
 # You can also configure a third-party app:
 #
@@ -28,9 +28,9 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
-config :event_logger, :environment, Mix.env()
+config :stump, :environment, Mix.env()
 
-config :event_logger, time_api: EventLogger.Time.DateTime
+config :stump, time_api: Stump.Time.DateTime
 
 config :logger, :console, format: "$message\n"
 

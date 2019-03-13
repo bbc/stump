@@ -1,7 +1,7 @@
-defmodule EventLogger do
+defmodule Stump do
   import Logger, only: [log: 2]
 
-  @time Application.get_env(:event_logger, :time_api)
+  @time Application.get_env(:stump, :time_api)
 
   def log(level, data) when level in [:error, :warn, :info] do
     Logger.log(level, format(level, data))

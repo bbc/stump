@@ -1,32 +1,32 @@
-# EventLogger
+# Stump
 
-EventLogger is an Elixir log wrapper that allows you to pass Maps into the built in Logger function, returning them in a JSON format and outputting to a file in Production mode.
+Stump is an Elixir log wrapper that allows you to pass Maps into the built in Logger function, returning them in a JSON format and outputting to a file in Production mode.
 Providing you with the ability to write more descriptive log messages and send logs to services expecting logs in the json/map format.
 The library is not limited to maps, it can also take in strings and create JSON formatted log messages.
 
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `event_logger` to your list of dependencies in `mix.exs`:
+by adding `stump` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:event_logger, "~> 0.1.0"}
+    {:stump, "~> 0.1.0"}
   ]
 end
 ```
 
 Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/event_logger](https://hexdocs.pm/event_logger).
+be found at [https://hexdocs.pm/stump](https://hexdocs.pm/stump).
 
 ## Usage
 Once the package has been installed into your project, the following usage is recommended:
 
 ```elixir
   def foo do
-    EventLogger.log(:error, %{message: "Error Logged"})
+    Stump.log(:error, %{message: "Error Logged"})
   end
 ```
 
@@ -47,7 +47,7 @@ It can also be nicely used in conjuction with libraries such as [HTTPoison](http
 
 ```elixir
   def process(_, {:error, %HTTPoison.Error{reason: reason}}) do
-    EventLogger.log(:error, %{message: "Failed to process HTTP request, reason: #{reason}", event: "HTTPoison.Error"})
+    Stump.log(:error, %{message: "Failed to process HTTP request, reason: #{reason}", event: "HTTPoison.Error"})
     {:error, reason}
   end
 ```

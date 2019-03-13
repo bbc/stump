@@ -19,7 +19,6 @@ use Mix.Config
 # You can also configure a third-party app:
 #
 #     config :logger, level: :info
-#
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment
@@ -29,8 +28,10 @@ use Mix.Config
 #
 #     import_config "#{Mix.env()}.exs"
 
-config :logger, :console, format: "$message\n", colors: [enabled: false]
-
 config :event_logger, :environment, Mix.env()
+
+config :event_logger, time_api: EventLogger.Time.DateTime
+
+config :logger, :console, format: "$message\n"
 
 import_config "#{Mix.env}.exs"

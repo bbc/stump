@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :event_logger, time_api: EventLogger.Time.MockTime
+config :stump, time_api: Stump.Time.MockTime
 
 config :logger, :console,
   format: "$message\n",

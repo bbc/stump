@@ -1,9 +1,9 @@
-defmodule EventLogger.MixProject do
+defmodule Stump.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :event_logger,
+      app: :stump,
       version: "0.1.0",
       elixir: "~> 1.8",
       build_embedded: Mix.env == :prod,
@@ -39,8 +39,8 @@ defmodule EventLogger.MixProject do
      files: ["lib", "mix.exs", "README.md"],
      maintainers: ["bbc", "JoeARO", "woodyblah", "james-bowers", "ettomatic", "samfrench", "alexmuller"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/JoeARO/event_logger",
-              "Docs" => "https://hexdocs.pm/event_logger/"}
+     links: %{"GitHub" => "https://github.com/JoeARO/stump",
+              "Docs" => "https://hexdocs.pm/stump/"}
      ]
   end
 end

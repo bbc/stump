@@ -39,7 +39,7 @@ Providing you with output in this format:
 You can also pass in strings if you would prefer not to use maps:
 
 ```elixir
-  Log.error(:error, "Error Logged")
+  Stump.log(:error, "Error Logged")
   {"message":"Error Logged","level":"error","datetime":"2019-03-06T12:21:52.661587Z"}
 ```
 

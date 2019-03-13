@@ -17,9 +17,7 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/stump](https://hexdocs.pm/stump).
+Documentation can be found at [https://hexdocs.pm/stump/Stump.html](https://hexdocs.pm/stump/Stump.html).
 
 ## Usage
 Once the package has been installed into your project, the following usage is recommended:

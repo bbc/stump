@@ -2,7 +2,7 @@
 
 EventLogger is an Elixir log wrapper that allows you to pass Maps into the built in Logger function, returning them in a JSON format and outputting to a file in Production mode.
 Providing you with the ability to write more descriptive log messages and send logs to services expecting logs in the json/map format.
-The library isnt limited to maps, it can also take in strings and create JSON formatted log messages.
+The library is not limited to maps, it can also take in strings and create JSON formatted log messages.
 
 ## Installation
 
@@ -22,7 +22,7 @@ and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/event_logger](https://hexdocs.pm/event_logger).
 
 ## Usage
-Once the packages has been installed into your package we recommend usage as so:
+Once the package has been installed into your project, the following usage is recommended:
 
 ```elixir
   def foo do
@@ -57,7 +57,7 @@ It can also be nicely used in conjuction with libraries such as [HTTPoison](http
 The default configuration for this will simply log to the console, if you would like to configure it you can simply edit your `config.exs` file.
 It is worth noting that you must keep the format as `format: "$message\n"` with whichever logging backend you choose to use otherwise you will get duplication of information.
 
-For example if you would like to Log to a file the following configuration would be recommended:
+If for example you would like to Log to a file the following configuration would be recommended:
 
 - First edit your `mix.exs` and add the LoggerFileBackend
 

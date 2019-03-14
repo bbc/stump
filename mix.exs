@@ -31,7 +31,7 @@ defmodule Stump.MixProject do
 
   defp description do
     """
-      A logging library that will ouput to JSON given a log level and a message to log.
+      An Elixir Log Wrapper allows Maps and Strings to be passed to the Elixir Logger, along with that it will ouput to JSON.
     """
   end
 

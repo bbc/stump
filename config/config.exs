@@ -30,8 +30,6 @@ use Mix.Config
 
 config :stump, :environment, Mix.env()
 
-config :stump, time_api: Stump.Time.DateTime
-
 config :logger, :console, format: "$message\n"
 
 import_config "#{Mix.env}.exs"

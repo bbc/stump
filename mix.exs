@@ -37,11 +37,10 @@ defmodule Stump.MixProject do
 
   defp package do
     [
-     files: ["lib", "mix.exs", "README.md"],
+     files:       ["lib", "mix.exs", "README.md"],
      maintainers: ["bbc", "JoeARO", "woodyblah", "james-bowers", "ettomatic", "samfrench", "alexmuller"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/JoeARO/stump",
-              "Docs" => "https://hexdocs.pm/stump/"}
+     licenses:    ["MIT"],
+     links:       %{"GitHub" => "https://github.com/JoeARO/stump", "Docs" => "https://hexdocs.pm/stump/"}
      ]
   end
 end

@@ -1,4 +1,27 @@
 defmodule Stump do
+  @moduledoc """
+  Stump allows for Maps and Strings to be passed into the Elixir Logger and return logs in the JSON format.
+  """
+  @moduledoc since: "1.0.0"
+  @doc """
+  The `log` method formats your given error message whether it be a Map or a String then passes it to Elixirs own Logger.
+
+  Usage for the module is as follows:
+
+  ```
+  Stump.log(:level, message)
+  ```
+
+  The level can be any of four `:debug/:info/:warn/:error`
+
+
+  Message can be either a `String` or `Map`
+
+  ```
+    Stump.log(:error, 'Error Logged')
+    {'message':'Error Logged','level':'error','datetime':'2019-03-06T12:21:52.661587Z'}
+  ```
+  """
   import Logger, only: [log: 2]
 
   @time Application.get_env(:stump, :time_api)
@@ -22,6 +45,7 @@ defmodule Stump do
     |> Poison.encode!()
   end
 
+  @doc false
   def time() do
     @time.utc_now()
   end

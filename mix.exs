@@ -24,23 +24,23 @@ defmodule Stump.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 3.1"}
+      {:poison, "~> 3.1"},
+      {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end
 
   defp description do
     """
-      A logging library that will ouput to JSON given a log level and a message to log.
+      An Elixir Log Wrapper allows Maps and Strings to be passed to the Elixir Logger, along with that it will ouput to JSON.
     """
   end
 
   defp package do
     [
-     files: ["lib", "mix.exs", "README.md"],
+     files:       ["lib", "mix.exs", "README.md"],
      maintainers: ["bbc", "JoeARO", "woodyblah", "james-bowers", "ettomatic", "samfrench", "alexmuller"],
-     licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/JoeARO/stump",
-              "Docs" => "https://hexdocs.pm/stump/"}
+     licenses:    ["MIT"],
+     links:       %{"GitHub" => "https://github.com/JoeARO/stump", "Docs" => "https://hexdocs.pm/stump/"}
      ]
   end
 end

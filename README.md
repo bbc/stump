@@ -17,9 +17,7 @@ def deps do
 end
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/stump](https://hexdocs.pm/stump).
+Documentation can be found at [https://hexdocs.pm/stump/Stump.html](https://hexdocs.pm/stump/Stump.html).
 
 ## Usage
 Once the package has been installed into your project, the following usage is recommended:
@@ -39,7 +37,7 @@ Providing you with output in this format:
 You can also pass in strings if you would prefer not to use maps:
 
 ```elixir
-  Log.error(:error, "Error Logged")
+  Stump.log(:error, "Error Logged")
   {"message":"Error Logged","level":"error","datetime":"2019-03-06T12:21:52.661587Z"}
 ```
 

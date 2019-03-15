@@ -17,7 +17,9 @@ defmodule Stump.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {Stump.Application, [env: Mix.env()]},
+      env: [time_api: Stump.Time.DateTime]
     ]
   end
 

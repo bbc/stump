@@ -18,7 +18,6 @@ defmodule Stump.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {Stump.Application, [env: Mix.env()]},
       env: [time_api: Stump.Time.DateTime]
     ]
   end

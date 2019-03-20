@@ -4,7 +4,7 @@ defmodule Stump.MixProject do
   def project do
     [
       app: :stump,
-      version: "0.1.0",
+      version: "1.0.0",
       elixir: "~> 1.8",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env() == :prod,
@@ -41,7 +41,7 @@ defmodule Stump.MixProject do
      files:       ["lib", "mix.exs", "README.md"],
      maintainers: ["bbc", "JoeARO", "woodyblah", "james-bowers", "ettomatic", "samfrench", "alexmuller"],
      licenses:    ["MIT"],
-     links:       %{"GitHub" => "https://github.com/JoeARO/stump", "Docs" => "https://hexdocs.pm/stump/"}
+     links:       %{"GitHub" => "https://github.com/bbc/stump", "Docs" => "https://hexdocs.pm/stump/"}
      ]
   end
 end

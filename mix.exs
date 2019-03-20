@@ -41,7 +41,7 @@ defmodule Stump.MixProject do
      files:       ["lib", "mix.exs", "README.md"],
      maintainers: ["bbc", "JoeARO", "woodyblah", "james-bowers", "ettomatic", "samfrench", "alexmuller"],
      licenses:    ["MIT"],
-     links:       %{"GitHub" => "https://github.com/JoeARO/stump", "Docs" => "https://hexdocs.pm/stump/"}
+     links:       %{"GitHub" => "https://github.com/bbc/stump", "Docs" => "https://hexdocs.pm/stump/"}
      ]
   end
 end

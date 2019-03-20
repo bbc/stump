@@ -24,8 +24,6 @@ defmodule Stump do
   """
   import Logger, only: [log: 2]
 
-  @time Application.get_env(:stump, :time_api)
-
   def log(level, data) when level in [:error, :warn, :info] do
     Logger.log(level, format(level, data))
   end
@@ -47,6 +45,6 @@ defmodule Stump do
 
   @doc false
   def time() do
-    @time.utc_now()
+    Application.get_env(:stump, :time_api).utc_now()
   end
 end

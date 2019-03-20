@@ -32,4 +32,6 @@ config :stump, :environment, Mix.env()
 
 config :logger, :console, format: "$message\n"
 
-import_config "#{Mix.env}.exs"
+if Mix.env == :test do
+  import_config "test.exs"
+end

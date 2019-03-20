@@ -1,4 +1,5 @@
 # Stump
+[![Build Status](https://travis-ci.org/bbc/stump.svg?branch=master)](https://travis-ci.org/bbc/stump)
 
 Stump is an Elixir log wrapper that allows you to pass Maps into the built in Logger function, returning them in a JSON format and outputting to a file in Production mode.
 Providing you with the ability to write more descriptive log messages and send logs to services expecting logs in the json/map format.

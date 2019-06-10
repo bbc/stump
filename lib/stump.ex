@@ -35,12 +35,12 @@ defmodule Stump do
   defp format(level, data) when is_map(data) do
     data
     |> Map.merge(%{datetime: time(), level: to_string(level)})
-    |> Poison.encode!()
+    |> Jason.encode!()
   end
 
   defp format(level, data) when is_bitstring(data) or is_binary(data) do
     %{message: data, datetime: time(), level: to_string(level)}
-    |> Poison.encode!()
+    |> Jason.encode!()
   end
 
   @doc false

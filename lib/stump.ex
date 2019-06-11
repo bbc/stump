@@ -46,8 +46,8 @@ defmodule Stump do
   defp encode(map) do
     case Jason.encode(map) do
       {:ok, value}    -> value
-      {:error, value} ->
-        encode(%{message: "There was an error encoding your log message: #{value.message}", datetime: time()})
+      {:error, encode_error} ->
+        encode(%{encoding_error_message: "There was an error encoding your log message: #{encode_error.message}", datetime: time()})
     end
   end
 

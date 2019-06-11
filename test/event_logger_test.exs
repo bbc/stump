@@ -31,11 +31,11 @@ defmodule StumpTest do
 
   describe "failure" do
     test "when Stump receives data it cannot encode, it logs the error" do
-      assert capture_log(fn ->Stump.log(:error, <<0x80>>) end) == "{\"datetime\":\"2019-03-01T00:00:00Z\",\"message\":\"There was an error encoding your log message: invalid byte 0x80 in <<128>>\"}\n"
+      assert capture_log(fn ->Stump.log(:error, <<0x80>>) end) == "{\"datetime\":\"2019-03-01T00:00:00Z\",\"encoding_error_message\":\"There was an error encoding your log message: invalid byte 0x80 in <<128>>\"}\n"
     end
 
     test "when Stump receives a map containing data it cannot encode, it logs the error" do
-      assert capture_log(fn ->Stump.log(:error, %{message: <<0x80>>}) end) == "{\"datetime\":\"2019-03-01T00:00:00Z\",\"message\":\"There was an error encoding your log message: invalid byte 0x80 in <<128>>\"}\n"
+      assert capture_log(fn ->Stump.log(:error, %{message: <<0x80>>}) end) == "{\"datetime\":\"2019-03-01T00:00:00Z\",\"encoding_error_message\":\"There was an error encoding your log message: invalid byte 0x80 in <<128>>\"}\n"
     end
   end
 end

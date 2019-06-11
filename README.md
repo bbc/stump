@@ -5,6 +5,8 @@ Stump is an Elixir log wrapper that allows you to pass Maps into the built in Lo
 Providing you with the ability to write more descriptive log messages and send logs to services expecting logs in the json/map format.
 The library is not limited to maps, it can also take in strings and create JSON formatted log messages.
 
+Please note, from Version 1.1 Stump will be using Jason as its JSON encoder. This will effect the ordering of logged items.
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -13,7 +15,7 @@ by adding `stump` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:stump, "~> 1.0.0"}
+    {:stump, "~> 1.1.0"}
   ]
 end
 ```

@@ -4,7 +4,7 @@ defmodule Stump.MixProject do
   def project do
     [
       app: :stump,
-      version: "1.0.0",
+      version: "1.1.0",
       elixir: "~> 1.8",
       build_embedded: Mix.env == :prod,
       start_permanent: Mix.env() == :prod,
@@ -25,7 +25,7 @@ defmodule Stump.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 3.1"},
+      {:jason, "~> 1.1"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

@@ -35,12 +35,20 @@ defmodule Stump do
   defp format(level, data) when is_map(data) do
     data
     |> Map.merge(%{datetime: time(), level: to_string(level)})
-    |> Jason.encode!()
+    |> encode()
   end
 
   defp format(level, data) when is_bitstring(data) or is_binary(data) do
     %{message: data, datetime: time(), level: to_string(level)}
-    |> Jason.encode!()
+    |> encode()
+  end
+
+  defp encode(map) do
+    case Jason.encode(map) do
+      {:ok, value}    -> value
+      {:error, encode_error} ->
+        encode(%{encoding_error_message: "There was an error encoding your log message: #{encode_error.message}", datetime: time()})
+    end
   end
 
   @doc false

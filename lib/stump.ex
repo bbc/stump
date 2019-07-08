@@ -32,6 +32,14 @@ defmodule Stump do
     format(level, "Event Logger received log level, but no error message was provided")
   end
 
+  defp format(level, %_{} = struct) do
+    struct
+    |> Map.from_struct()
+    |> Map.merge(%{datetime: time(), level: to_string(level)})
+    |> encode()
+
+  end
+
   defp format(level, data) when is_map(data) do
     data
     |> Map.merge(%{datetime: time(), level: to_string(level)})

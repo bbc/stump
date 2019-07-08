@@ -33,11 +33,8 @@ defmodule Stump do
   end
 
   defp format(level, %_{} = struct) do
-    struct
-    |> Map.from_struct()
-    |> Map.merge(%{datetime: time(), level: to_string(level)})
-    |> encode()
-
+    map = struct |> Map.from_struct()
+    format(level, map)
   end
 
   defp format(level, data) when is_map(data) do
@@ -53,9 +50,15 @@ defmodule Stump do
 
   defp encode(map) do
     case Jason.encode(map) do
-      {:ok, value}    -> value
+      {:ok, value} ->
+        value
+
       {:error, encode_error} ->
-        encode(%{encoding_error_message: "There was an error encoding your log message: #{encode_error.message}", datetime: time()})
+        encode(%{
+          encoding_error_message:
+            "There was an error encoding your log message: #{encode_error.message}",
+          datetime: time()
+        })
     end
   end
 

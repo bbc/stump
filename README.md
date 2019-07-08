@@ -15,7 +15,7 @@ by adding `stump` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:stump, "~> 1.2.0"}
+    {:stump, "~> 1.3.0"}
   ]
 end
 ```

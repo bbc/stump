@@ -33,8 +33,7 @@ defmodule Stump do
   end
 
   defp format(level, %_{} = struct) do
-    map = struct |> Map.from_struct()
-    format(level, map)
+    format(level, Map.from_struct(struct))
   end
 
   defp format(level, data) when is_map(data) do

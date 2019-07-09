@@ -32,6 +32,10 @@ defmodule Stump do
     format(level, "Event Logger received log level, but no error message was provided")
   end
 
+  defp format(level, %_{} = struct) do
+    format(level, Map.from_struct(struct))
+  end
+
   defp format(level, data) when is_map(data) do
     data
     |> Map.merge(%{datetime: time(), level: to_string(level)})
@@ -45,9 +49,15 @@ defmodule Stump do
 
   defp encode(map) do
     case Jason.encode(map) do
-      {:ok, value}    -> value
+      {:ok, value} ->
+        value
+
       {:error, encode_error} ->
-        encode(%{encoding_error_message: "There was an error encoding your log message: #{encode_error.message}", datetime: time()})
+        encode(%{
+          encoding_error_message:
+            "There was an error encoding your log message: #{encode_error.message}",
+          datetime: time()
+        })
     end
   end
 

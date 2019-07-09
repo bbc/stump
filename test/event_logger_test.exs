@@ -9,7 +9,7 @@ defmodule StumpTest do
     assert Stump.time == Stump.Time.MockTime.utc_now()
   end
 
-  describe "sucess" do
+  describe "success" do
     test "when log level is :info and a message is provided it, it logs as JSON" do
       assert capture_log(fn ->Stump.log(:info, "Here is some info") end) == "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"info\",\"message\":\"Here is some info\"}\n"
     end

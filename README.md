@@ -7,6 +7,8 @@ The library is not limited to maps, it can also take in strings and create JSON 
 
 Please note, from Version 1.1 Stump will be using Jason as its JSON encoder. This will effect the ordering of logged items.
 
+It is strongly advised that you use version 1.4 of Stump and above, version 1.3 could cause an error to be thrown when trying to encode log messages.
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
@@ -15,7 +17,7 @@ by adding `stump` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:stump, "~> 1.3.0"}
+    {:stump, "~> 1.4.0"}
   ]
 end
 ```

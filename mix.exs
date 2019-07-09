@@ -4,7 +4,7 @@ defmodule Stump.MixProject do
   def project do
     [
       app: :stump,
-      version: "1.3.0",
+      version: "1.4.0",
       elixir: "~> 1.8",
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,

@@ -65,10 +65,9 @@ defmodule Stump do
       {:ok, value} ->
         value
 
-      {:error, encode_error} ->
+      {:error, _} ->
         encode(%{
-          encoding_error_message:
-            "There was an error encoding your log message: #{encode_error.message}",
+          jason_error: "Jason returned an error encoding your log message",
           datetime: time()
         })
     end

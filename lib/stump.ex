@@ -38,6 +38,7 @@ defmodule Stump do
 
   defp format(level, data) when is_map(data) do
     data
+    |> destruct()
     |> Map.merge(%{datetime: time(), level: to_string(level)})
     |> encode()
   end
@@ -46,6 +47,18 @@ defmodule Stump do
     %{message: data, datetime: time(), level: to_string(level)}
     |> encode()
   end
+
+  defp destruct(struct = %_{}) do
+    struct
+    |> Map.from_struct()
+    |> destruct()
+  end
+
+  defp destruct(map) when is_map(map) do
+    Enum.into(map, %{}, fn {k, v} -> {k, destruct(v)} end)
+  end
+
+  defp destruct(data), do: data
 
   defp encode(map) do
     case Jason.encode(map) do

@@ -27,8 +27,20 @@ defmodule StumpTest do
     end
 
     test "when Stump receives a struct it trasforms it to a map encodes it and logs it" do
-      assert capture_log(fn ->Stump.log(:error, %StumpTest{message: "This is the message from the struct"}) end) == 
-        "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"message\":\"This is the message from the struct\"}\n"
+      assert capture_log(fn ->
+               Stump.log(:error, %StumpTest{message: "This is the message from the struct"})
+             end) ==
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"message\":\"This is the message from the struct\"}\n"
+    end
+
+    test "when Stump receives nested structs it recursively turns them into maps to avoid Jason errors" do
+      assert capture_log(fn ->
+               Stump.log(:error, %{
+                 message: "This is an error",
+                 struct: %StumpTest{message: "I am a struct"}
+               })
+             end) ==
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"message\":\"This is an error\",\"struct\":{\"message\":\"I am a struct\"}}\n"
     end
   end
 

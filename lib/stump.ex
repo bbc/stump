@@ -59,7 +59,13 @@ defmodule Stump do
   end
 
   defp destruct(data) when is_tuple(data) do
-    Tuple.to_list(data)
+    data
+    |> Tuple.to_list()
+    |> destruct()
+  end
+
+  defp destruct(data) when is_list(data) do
+    Enum.map(data, fn x -> destruct(x) end)
   end
 
   defp destruct(data), do: data

@@ -68,6 +68,7 @@ defmodule Stump do
       {:error, _} ->
         encode(%{
           jason_error: "Jason returned an error encoding your log message",
+          raw_log: Kernel.inspect(map),
           datetime: time()
         })
     end

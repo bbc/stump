@@ -46,6 +46,12 @@ defmodule StumpTest do
              end) ==
                "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"message\":\"This is an error\",\"struct\":{\"message\":\"I am a struct\"}}\n"
     end
+
+    test "When receiving a Map containing a tuple, it converts the tuple into a list" do
+      assert capture_log(fn ->
+        Stump.log(:error, %{tuple: {:this_is, "a tuple"}})
+      end) == "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"tuple\":[\"this_is\",\"a tuple\"]}\n"
+    end
   end
 
   describe "failure" do

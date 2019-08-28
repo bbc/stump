@@ -58,6 +58,10 @@ defmodule Stump do
     Enum.into(map, %{}, fn {k, v} -> {k, destruct(v)} end)
   end
 
+  defp destruct(data) when is_tuple(data) do
+    Tuple.to_list(data)
+  end
+
   defp destruct(data), do: data
 
   defp encode(map) do

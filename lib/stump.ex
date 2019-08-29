@@ -38,7 +38,7 @@ defmodule Stump do
 
   defp format(level, data) when is_map(data) do
     data
-    |> destruct()
+    |> PhStTransform.transform(formatting_potion())
     |> Map.merge(%{datetime: time(), level: to_string(level)})
     |> encode()
   end
@@ -48,27 +48,23 @@ defmodule Stump do
     |> encode()
   end
 
-  defp destruct(struct = %_{}) do
-    struct
-    |> Map.from_struct()
-    |> destruct()
+  defp formatting_potion do
+    %{
+      Atom => fn atom -> Atom.to_string(atom) end,
+      Tuple => fn tuple -> Tuple.to_list(tuple) end,
+      Any => &other_types/1
+    }
   end
 
-  defp destruct(map) when is_map(map) do
-    Enum.into(map, %{}, fn {k, v} -> {k, destruct(v)} end)
+  def other_types(struct) when is_map(struct) do
+    if Map.has_key?(struct, :__struct__) do
+      Map.from_struct(struct)
+    else
+      struct
+    end
   end
 
-  defp destruct(data) when is_tuple(data) do
-    data
-    |> Tuple.to_list()
-    |> destruct()
-  end
-
-  defp destruct(data) when is_list(data) do
-    Enum.map(data, fn x -> destruct(x) end)
-  end
-
-  defp destruct(data), do: data
+  def other_types(unknown), do: unknown
 
   defp encode(map) do
     case Jason.encode(map) do

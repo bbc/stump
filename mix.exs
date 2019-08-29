@@ -17,7 +17,7 @@ defmodule Stump.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger],
+      extra_applications: [:logger, :phst_transform],
       env: [time_api: Stump.Time.DateTime]
     ]
   end
@@ -26,6 +26,7 @@ defmodule Stump.MixProject do
   defp deps do
     [
       {:jason, "~> 1.1"},
+      {:phst_transform, "~> 1.0.0"},
       {:ex_doc, ">= 0.0.0", only: :dev}
     ]
   end

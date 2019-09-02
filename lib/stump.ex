@@ -58,6 +58,16 @@ defmodule Stump do
     Enum.into(map, %{}, fn {k, v} -> {k, destruct(v)} end)
   end
 
+  defp destruct(data) when is_tuple(data) do
+    data
+    |> Tuple.to_list()
+    |> destruct()
+  end
+
+  defp destruct(data) when is_list(data) do
+    Enum.map(data, fn x -> destruct(x) end)
+  end
+
   defp destruct(data), do: data
 
   defp encode(map) do
@@ -68,6 +78,7 @@ defmodule Stump do
       {:error, _} ->
         encode(%{
           jason_error: "Jason returned an error encoding your log message",
+          raw_log: Kernel.inspect(map),
           datetime: time()
         })
     end

@@ -46,6 +46,20 @@ defmodule StumpTest do
              end) ==
                "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"message\":\"This is an error\",\"struct\":{\"message\":\"I am a struct\"}}\n"
     end
+
+    test "When receiving a Map containing a tuple, it converts the tuple into a list" do
+      assert capture_log(fn ->
+               Stump.log(:error, %{tuple: {:this_is, "a tuple"}})
+             end) ==
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"tuple\":[\"this_is\",\"a tuple\"]}\n"
+    end
+
+    test "When receiving a Map containing a List containing a tuple, it converts the tuple inside the list into a list" do
+      assert capture_log(fn ->
+               Stump.log(:error, %{list: [1, 2, 3, {:this_is, "a tuple"}]})
+             end) ==
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"list\":[1,2,3,[\"this_is\",\"a tuple\"]]}\n"
+    end
   end
 
   describe "failure" do
@@ -61,12 +75,12 @@ defmodule StumpTest do
 
     test "when Stump receives data it cannot encode, it logs the error" do
       assert capture_log(fn -> Stump.log(:error, <<0x80>>) end) ==
-               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\"}\n"
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: #DateTime<2019-03-01 00:00:00Z>, level: \\\"error\\\", message: <<128>>}\"}\n"
     end
 
     test "when Stump receives a map containing data it cannot encode, it logs the error" do
       assert capture_log(fn -> Stump.log(:error, %{message: <<0x80>>}) end) ==
-               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\"}\n"
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: #DateTime<2019-03-01 00:00:00Z>, level: \\\"error\\\", message: <<128>>}\"}\n"
     end
   end
 end

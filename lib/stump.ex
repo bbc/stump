@@ -28,6 +28,14 @@ defmodule Stump do
     Logger.log(level, format(level, data))
   end
 
+  def metadata(keyword) do
+    Logger.metadata(keyword)
+  end
+
+  def metadata() do
+    Map.new(Logger.metadata())
+  end
+
   defp format(level, data) when data == nil or data == "" do
     format(level, "Event Logger received log level, but no error message was provided")
   end
@@ -39,12 +47,12 @@ defmodule Stump do
   defp format(level, data) when is_map(data) do
     data
     |> destruct()
-    |> Map.merge(%{datetime: time(), level: to_string(level)})
+    |> Map.merge(%{datetime: time(), level: to_string(level), metadata: metadata()})
     |> encode()
   end
 
   defp format(level, data) when is_bitstring(data) or is_binary(data) do
-    %{message: data, datetime: time(), level: to_string(level)}
+    %{message: data, datetime: time(), level: to_string(level), metadata: metadata()}
     |> encode()
   end
 

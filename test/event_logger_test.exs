@@ -82,12 +82,12 @@ defmodule StumpTest do
 
     test "when Stump receives data it cannot encode, it logs the error" do
       assert capture_log(fn -> Stump.log(:error, <<0x80>>) end) ==
-               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: #DateTime<2019-03-01 00:00:00Z>, level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: \\\"2019-03-01T00:00:00Z\\\", level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
     end
 
     test "when Stump receives a map containing data it cannot encode, it logs the error" do
       assert capture_log(fn -> Stump.log(:error, %{message: <<0x80>>}) end) ==
-               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: #DateTime<2019-03-01 00:00:00Z>, level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: \\\"2019-03-01T00:00:00Z\\\", level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
     end
   end
 end

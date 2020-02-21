@@ -76,6 +76,14 @@ defmodule Stump do
     Enum.map(data, fn x -> destruct(x) end)
   end
 
+  defp destruct(data) when is_reference(data) do
+    "#Ref<>"
+  end
+
+  defp destruct(data) when is_pid(data) do
+    "#Pid<>"
+  end
+
   defp destruct(data), do: data
 
   defp encode(map) do

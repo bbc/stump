@@ -8,6 +8,6 @@ defmodule Stump.Time.MockTime do
 
   def utc_now() do
     # It's always 1st March 2019
-    DateTime.from_unix!(01_551_398_400)
+    DateTime.from_unix!(01_551_398_400) |> DateTime.to_iso8601()
   end
 end

@@ -8,6 +8,6 @@ defmodule Stump.Time.DateTime do
   import DateTime, only: [utc_now: 0]
 
   def utc_now() do
-    DateTime.utc_now()
+    DateTime.utc_now() |> DateTime.to_iso8601()
   end
 end

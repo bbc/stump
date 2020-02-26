@@ -67,6 +67,20 @@ defmodule StumpTest do
       assert capture_log(fn -> Stump.log(:info, "There will be metadata with this!") end) ==
                "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"info\",\"message\":\"There will be metadata with this!\",\"metadata\":{\"metadata_label\":\"some_metadata\"}}\n"
     end
+
+    test "When receiving a tuple containing an Elixir Reference replace it with a placeholder" do
+      assert capture_log(fn ->
+               Stump.log(:error, %{show_a_ref: make_ref()})
+             end) ==
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"metadata\":{},\"show_a_ref\":\"#Ref<>\"}\n"
+    end
+
+    test "When receiving a tuple containing a Pid replace it with a placeholder" do
+      assert capture_log(fn ->
+               Stump.log(:error, %{show_a_pid: self()})
+             end) ==
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"metadata\":{},\"show_a_pid\":\"#Pid<>\"}\n"
+    end
   end
 
   describe "failure" do
@@ -82,12 +96,12 @@ defmodule StumpTest do
 
     test "when Stump receives data it cannot encode, it logs the error" do
       assert capture_log(fn -> Stump.log(:error, <<0x80>>) end) ==
-               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: #DateTime<2019-03-01 00:00:00Z>, level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: \\\"2019-03-01T00:00:00Z\\\", level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
     end
 
     test "when Stump receives a map containing data it cannot encode, it logs the error" do
       assert capture_log(fn -> Stump.log(:error, %{message: <<0x80>>}) end) ==
-               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: #DateTime<2019-03-01 00:00:00Z>, level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"jason_error\":\"Jason returned an error encoding your log message\",\"raw_log\":\"%{datetime: \\\"2019-03-01T00:00:00Z\\\", level: \\\"error\\\", message: <<128>>, metadata: %{}}\"}\n"
     end
   end
 end

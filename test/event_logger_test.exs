@@ -9,6 +9,30 @@ defmodule StumpTest do
     assert Stump.time() == Stump.Time.MockTime.utc_now()
   end
 
+  describe "supports log levels" do
+    test "error" do
+      capture_log(fn -> Stump.log(:error, "A log message") end)
+    end
+
+    test "warn" do
+      capture_log(fn -> Stump.log(:warn, "A log message") end)
+    end
+
+    test "info" do
+      capture_log(fn -> Stump.log(:info, "A log message") end)
+    end
+
+    test "debug" do
+      capture_log(fn -> Stump.log(:debug, "A log message") end)
+    end
+
+    test "rejects unsupported log level" do
+      assert_raise(FunctionClauseError, fn ->
+        capture_log(fn -> Stump.log(:emergency, "A log message") end)
+      end)
+    end
+  end
+
   describe "success" do
     test "when log level is :info and a message is provided it, it logs as JSON" do
       assert capture_log(fn -> Stump.log(:info, "Here is some info") end) ==

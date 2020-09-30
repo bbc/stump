@@ -23,8 +23,8 @@ defmodule Stump do
   """
   import Logger, only: [log: 2]
 
-  def log(level, data) when level in [:error, :warn, :info, :debug] do
-    Logger.log(level, format(level, data))
+  def log(level, data, metadata \\ []) when level in [:error, :warn, :info, :debug] do
+    Logger.log(level, format(level, data), metadata)
   end
 
   def metadata(keyword) do

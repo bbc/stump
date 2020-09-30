@@ -105,6 +105,19 @@ defmodule StumpTest do
              end) ==
                "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"metadata\":{},\"show_a_pid\":\"#Pid<>\"}\n"
     end
+
+    test "When receiving metadata it passes it through to the logger" do
+      assert capture_log(fn ->
+               Stump.log(
+                 :error,
+                 %{
+                   message: "This is an error"
+                 },
+                 some_metadata: "yes"
+               )
+             end) ==
+               "{\"datetime\":\"2019-03-01T00:00:00Z\",\"level\":\"error\",\"message\":\"This is an error\",\"metadata\":{}}\n"
+    end
   end
 
   describe "failure" do
